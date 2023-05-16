@@ -13,7 +13,7 @@ public class GameScene extends JPanel implements KeyListener {
 
     public GameScene() {
         this.setBackground(Color.cyan);
-        this.player = new Player( 350 , 600);
+        this.player = new Player( 215 , 600);
         this.balls = new Balls[TOTAL_BALLS];
 //        Random random = new Random();
         this.setDoubleBuffered(true);

@@ -8,20 +8,20 @@ public class GameScene extends JPanel implements KeyListener {
 
     private  Player player;
     private Balls[] balls;
-    public static final int TOTAL_BALLS = 4;
+    public static final int TOTAL_BALLS = 3;
 
 
     public GameScene() {
         this.setBackground(Color.cyan);
         this.player = new Player( 350 , 520);
         this.balls = new Balls[TOTAL_BALLS];
-        Random random = new Random();
+//        Random random = new Random();
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
         for (int i = 0; i < this.balls.length; i++) {
             //  int sleepTime = random.nextInt(5)+2;
-            this.balls[i] = new Balls(2);
+            this.balls[i] = new Balls(8);
         }
         this.mainGameLoop();
         this.addKeyListener(this);
@@ -44,7 +44,7 @@ public class GameScene extends JPanel implements KeyListener {
                 repaint();
                 updateBalls();
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(4);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -66,8 +66,8 @@ public class GameScene extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int dx = 0;
         switch (e.getKeyCode()){
-            case  KeyEvent.VK_RIGHT -> this.player.move(2);
-            case  KeyEvent.VK_LEFT -> this.player.move(-2);
+            case  KeyEvent.VK_RIGHT -> this.player.move(7);
+            case  KeyEvent.VK_LEFT -> this.player.move(-7);
         }
     }
 

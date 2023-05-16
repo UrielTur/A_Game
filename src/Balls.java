@@ -11,14 +11,14 @@ public class Balls extends Thread {
     public Balls(int speed) {
         Random random = new Random();
         this.x = random.nextInt(620);
-        this.y = -(random.nextInt(1000)+10);
+        this.y = -(random.nextInt(800)+300);
         this.speed = speed;
     }
 
     public void run() {
-            y = y+2+speed;
+            y = y+1+speed;
             if (this.y > Window.WINDOW_HEIGHT) {
-                this.y = -10;
+                this.y = -150;
                 this.x = random.nextInt(600);
             }
     }

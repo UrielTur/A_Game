@@ -34,6 +34,7 @@ public class GameScene extends JPanel implements KeyListener {
             this.balls[i].paint(g);
         }
 
+
     }
 
 

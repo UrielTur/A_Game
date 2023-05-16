@@ -25,6 +25,7 @@ public class GameScene extends JPanel implements KeyListener {
         }
         this.mainGameLoop();
         this.addKeyListener(this);
+
     }
 
     public void paintComponent (Graphics g){

@@ -2,49 +2,43 @@ import java.awt.*;
 import java.util.Random;
 
 public class Balls extends Thread {
-    private int x;
+    private int x, speed;
     private int y = -2;
     public static final int SIZE = 30;
     private boolean isDisappeared;
+    private Random random = new Random();
 
-    public Balls() {
+    public Balls(int speed) {
         Random random = new Random();
         this.x = random.nextInt(620);
-        this.y = -10;
+        this.y = -(random.nextInt(1000)+10);
+        this.speed = speed;
     }
 
     public void run() {
-        Random random = new Random();
-//        boolean goingDown = random.nextBoolean();
-//        int speed = random.nextInt(5, 40);
-        while (true) {
-//            if (goingDown){
-            y+=2;
-            Utils.sleep(random.nextInt(5 , 35));
-            if (this.y > Window.WINDOW_HEIGHT){
+            y = y+2+speed;
+            if (this.y > Window.WINDOW_HEIGHT) {
                 this.y = -10;
                 this.x = random.nextInt(600);
             }
-        }
-//            Utils.sleep(speed);
     }
 
     public void isDisappeared() {
         this.isDisappeared = true;
     }
 
-    public void paint (Graphics graphics) {
+    public void paint(Graphics graphics) {
         if (!this.isDisappeared) {
             graphics.setColor(Color.BLACK);
             graphics.fillOval(this.x, this.y, SIZE, SIZE);
         }
     }
 
-    public Rectangle calculateRectangle () {
+    public Rectangle calculateRectangle() {
         return new Rectangle(this.x, this.y, SIZE, SIZE);
     }
 
-    public void catchTheBalls () {
+    public void catchTheBalls() {
 
     }
 }

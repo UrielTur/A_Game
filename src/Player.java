@@ -24,7 +24,6 @@ public class Player {
         public void paint(Graphics graphics) {
             ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\תמונות\\iconPRo.png");
             imageIcon.paintIcon(null, graphics, this.x, this.y);
-            imageIcon.getIconWidth();
         }
 
         public void kill () {
@@ -37,9 +36,8 @@ public class Player {
 //        this.alive = true;
 //    }
 
-        public void move(int dx, int dy) {
+        public void move(int dx) {
             this.x += dx;
-            this.y += dy;
         }
 
 

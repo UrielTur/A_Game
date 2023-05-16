@@ -8,7 +8,7 @@ public class GameScene extends JPanel implements KeyListener {
 
     private  Player player;
     private Balls[] balls;
-    public static final int TOTAL_BALLS = 3;
+    public static final int TOTAL_BALLS = 5;
 
 
     public GameScene() {
@@ -44,7 +44,7 @@ public class GameScene extends JPanel implements KeyListener {
                 repaint();
                 updateBalls();
                 try {
-                    Thread.sleep(4);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -66,8 +66,8 @@ public class GameScene extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int dx = 0;
         switch (e.getKeyCode()){
-            case  KeyEvent.VK_RIGHT -> this.player.move(7);
-            case  KeyEvent.VK_LEFT -> this.player.move(-7);
+            case  KeyEvent.VK_RIGHT -> this.player.move(15);
+            case  KeyEvent.VK_LEFT -> this.player.move(-15);
         }
     }
 

@@ -18,7 +18,7 @@ public class Balls extends Thread {
     public void run() {
             y +=1;
             if (this.y > Window.WINDOW_HEIGHT) {
-                this.y = -150;
+                this.y = -200;
                 this.x = random.nextInt(400);
             }
     }

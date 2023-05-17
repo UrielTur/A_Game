@@ -17,7 +17,6 @@ public class GameScene extends JPanel implements KeyListener {
         this.setBackground(Color.cyan);
         this.player = new Player( X_OF_PLAYER , Y_OF_PLAYER);
         this.balls = new Balls[TOTAL_BALLS];
-//        Random random = new Random();
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
@@ -61,11 +60,6 @@ public class GameScene extends JPanel implements KeyListener {
         }
     }
 
-//    private void updatePlayer() {
-//        for (int i = 0; i < player; i++) {
-//
-//        }
-//    }
 
     private void updateBalls() {
         for (int i = 0; i < balls.length; i++) {
@@ -78,16 +72,13 @@ public class GameScene extends JPanel implements KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-//        int dx = 0;
-//        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-//            dx = 17;
-//        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-//            dx = -17;
-//        }
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_RIGHT -> this.player.move(17);
-                case KeyEvent.VK_LEFT -> this.player.move(-17);
-            }
+        int dx = 0;
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            dx = 17;
+        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            dx = -17;
+        }
+        this.player.move(dx);
         }
 
 

@@ -68,21 +68,4 @@ public class Player {
         return imageWidth;
     }
 
-    //    public boolean isClose() {
-//        boolean isColse = true;
-//        if (this.x >= 850 || this.x <= 250) {
-//            isColse = false;
-//        }
-//        return isColse;
-//    }
-//
-//    public int fromBack() {
-//        if (this.x == 850) {
-//            this.x = 849;
-//        }
-//        if (this.x == 250) {
-//            this.x = 251;
-//        }
-//        return this.x;
-//    }
 }

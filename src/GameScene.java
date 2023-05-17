@@ -8,31 +8,32 @@ public class GameScene extends JPanel implements KeyListener {
 
     private  Player player;
     private Balls[] balls;
+    private static final int X_OF_PLAYER = 215;
+    private static final int Y_OF_PLAYER = 600;
     public static final int TOTAL_BALLS = 4;
 
 
     public GameScene() {
         this.setBackground(Color.cyan);
-        this.player = new Player( 215 , 600);
+        this.player = new Player( X_OF_PLAYER , Y_OF_PLAYER);
         this.balls = new Balls[TOTAL_BALLS];
 //        Random random = new Random();
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
         for (int i = 0; i < this.balls.length; i++) {
-            //  int sleepTime = random.nextInt(5)+2;
-            this.balls[i] = new Balls(6);
+            this.balls[i] = new Balls(7);
         }
         this.mainGameLoop();
         this.addKeyListener(this);
 
     }
 
-    public void paintComponent (Graphics g){
-        super.paintComponent(g); // כדי לא לדרוס דברים שהם הכרחיים מבהמחלקה הזאת
-        this.player.paint(g);
+    public void paintComponent (Graphics graphics){
+        super.paintComponent(graphics); // כדי לא לדרוס דברים שהם הכרחיים מבהמחלקה הזאת
+        this.player.paint(graphics);
         for (int i = 0; i < this.balls.length; i++) {
-            this.balls[i].paint(g);
+            this.balls[i].paint(graphics);
         }
 
 
@@ -44,6 +45,7 @@ public class GameScene extends JPanel implements KeyListener {
             while (true) {
                 repaint();
                 updateBalls();
+                updatePlayer();
                 try {
                     Thread.sleep(9);
                 } catch (InterruptedException e) {
@@ -53,6 +55,17 @@ public class GameScene extends JPanel implements KeyListener {
 
         }).start();
     }
+    public void updatePlayer() {
+        if (player.getX() < 0 || player.getX() > Window.WINDOW_WIDTH - this.player.getImageWidth()){
+            player.stopRun();
+        }
+    }
+
+//    private void updatePlayer() {
+//        for (int i = 0; i < player; i++) {
+//
+//        }
+//    }
 
     private void updateBalls() {
         for (int i = 0; i < balls.length; i++) {
@@ -65,12 +78,18 @@ public class GameScene extends JPanel implements KeyListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        int dx = 0;
-        switch (e.getKeyCode()){
-            case  KeyEvent.VK_RIGHT -> this.player.move(17);
-            case  KeyEvent.VK_LEFT -> this.player.move(-17);
+//        int dx = 0;
+//        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+//            dx = 17;
+//        } else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+//            dx = -17;
+//        }
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_RIGHT -> this.player.move(17);
+                case KeyEvent.VK_LEFT -> this.player.move(-17);
+            }
         }
-    }
+
 
     public void keyReleased(KeyEvent e) {
 

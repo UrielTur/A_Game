@@ -9,6 +9,7 @@ public class Window extends JFrame {
         this.setResizable(false);
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setTitle("Ball Catching");
         this.setLocationRelativeTo(null);
         GameScene game = new GameScene();
         this.add(game);

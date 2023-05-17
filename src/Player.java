@@ -2,10 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Player {
-    private int x = 350;
-        private int y = 520;
-        public static final int Size = 50;
-        private boolean alive;
+
+    private static final int X_OF_PLAYER = 215;
+    private static final int Y_OF_PLAYER = 600;
+
+    private int imageWidth = 113;
+    private int x;
+    private int y;
+    public static final int Size = 50;
+    private boolean alive;
 
 
         public Player(int x, int y) {
@@ -23,6 +28,7 @@ public class Player {
 
         public void paint(Graphics graphics) {
             ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\תמונות\\iconPRo.png");
+//            imageIcon.getIconWidth();
             imageIcon.paintIcon(null, graphics, this.x, this.y);
         }
 
@@ -37,7 +43,16 @@ public class Player {
 //    }
 
         public void move(int dx) {
-            this.x += dx;
+                this.x += dx;
+        }
+
+        public void stopRun() {
+            if (this.x < 0){
+                this.x = 0;
+            }
+            if (this.x >= Window.WINDOW_WIDTH - imageWidth){
+                this.x = Window.WINDOW_WIDTH - imageWidth;
+            }
         }
 
 
@@ -49,7 +64,11 @@ public class Player {
             return this.alive;
         }
 
-//    public boolean isClose() {
+    public int getImageWidth() {
+        return imageWidth;
+    }
+
+    //    public boolean isClose() {
 //        boolean isColse = true;
 //        if (this.x >= 850 || this.x <= 250) {
 //            isColse = false;

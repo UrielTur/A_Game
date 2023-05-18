@@ -27,7 +27,7 @@ public class Player {
         }
 
         public void paint(Graphics graphics) {
-            ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\תמונות\\iconPRo.png");
+            ImageIcon imageIcon = new ImageIcon("C:\\Users\\USER\\OneDrive\\שולחן העבודה\\תמונות פרוייקט\\תמונות מוכנות\\images__1_-removebg-preview.png");
 //            imageIcon.getIconWidth();
             imageIcon.paintIcon(null, graphics, this.x, this.y);
         }

@@ -13,7 +13,7 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean[] pressedKey;
 
     private Background background;
-    private ScoreScreen scoreScreen;
+    // private ScoreScreen scoreScreen;
 
 
     public GameScene() {
@@ -38,7 +38,7 @@ public class GameScene extends JPanel implements KeyListener {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics); // כדי לא לדרוס דברים שהם הכרחיים מבהמחלקה הזאת
         this.background.paint(graphics);
-        this.scoreScreen.paint(graphics);
+      //  this.scoreScreen.paint(graphics);
         this.player.paint(graphics);
 
         for (int i = 0; i < this.balls.length; i++) {

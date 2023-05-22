@@ -1,13 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 
 public class Window extends JFrame {
 
     public static  final int WINDOW_WIDTH = 640;//רוחב
     public static final int WINDOW_HEIGHT = 710;//גובה
-//    private  Image a =("C:/Users/USER/IdeaProjects/A_Game/src/imageIcon/רקע 1 שלם.png") ;
+    //    private  Image a =("C:/Users/USER/IdeaProjects/A_Game/src/imageIcon/רקע 1 שלם.png") ;
     public Window(){
         //Image image = new Image("C:/Users/USER/IdeaProjects/A_Game/src/imageIcon/רקע 1 שלם.png");
         this.setResizable(false);
@@ -23,7 +21,7 @@ public class Window extends JFrame {
     }
     public void PaintComponent(Graphics graphics){
         super.paintComponents(graphics);
-     //   this.setBackground(this.color);
+        //   this.setBackground(this.color);
     }
 
     public void showWindow () {

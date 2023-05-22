@@ -13,7 +13,7 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean[] pressedKey;
 
     private Background background;
-    // private ScoreScreen scoreScreen;
+    private ScoreScreen scoreScreen;
 
 
     public GameScene() {
@@ -21,8 +21,8 @@ public class GameScene extends JPanel implements KeyListener {
         this.background = new Background();
         this.player = new Player(X_OF_PLAYER, Y_OF_PLAYER);
         this.balls = new Balls[TOTAL_PRODUCTS];
-    //  this.scoreScreen = new ScoreScreen();
-    //    this.add(scoreScreen);
+        //  this.scoreScreen = new ScoreScreen();
+        //    this.add(scoreScreen);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
@@ -38,27 +38,15 @@ public class GameScene extends JPanel implements KeyListener {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics); // כדי לא לדרוס דברים שהם הכרחיים מבהמחלקה הזאת
         this.background.paint(graphics);
-      //  this.scoreScreen.paint(graphics);
+//        this.scoreScreen.paint(graphics);
         this.player.paint(graphics);
 
         for (int i = 0; i < this.balls.length; i++) {
             this.balls[i].paint(graphics, i);
         }
-
-
-    }
-    /*
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        this.scoreScreen(g);
     }
 
-    private void scoreScreen(Graphics g) {
-        super.paint(g);
-        this.scoreScreen(g);
-    }
-*/
+
 
     private void mainGameLoop() {
         new Thread(() -> {
@@ -66,14 +54,23 @@ public class GameScene extends JPanel implements KeyListener {
                 repaint();
                 updateBalls();
                 updatePlayer();
+                int counterOfCollision = 0;
+                for (int i = 0; i < balls.length; i++) {
+                    if (collision(balls[i])) {
+                        counterOfCollision++;
+                        this.balls[i].goingUp();
+                        if (counterOfCollision > 5){
+                            this.balls[i].runDoubleSpeed();
+                        }
+                    }
+                }
                 int dx = 0;
                 try {
                     if (pressedKey[0])
-                        dx+=4;
+                        dx += 4;
                     if (pressedKey[1])
-                        dx-=4;
+                        dx -= 4;
                     this.player.move(dx);
-
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
@@ -81,6 +78,15 @@ public class GameScene extends JPanel implements KeyListener {
             }
 
         }).start();
+    }
+
+    private boolean collision (Balls balls) {
+        boolean collision = false;
+        if (balls.catchTheBalls().intersects(this.player.calculateRectangle())){
+            collision = true;
+        }
+
+        return collision;
     }
 
     public void updatePlayer() {
@@ -92,7 +98,7 @@ public class GameScene extends JPanel implements KeyListener {
 
     private void updateBalls() {
         for (int i = 0; i < balls.length; i++) {
-            balls[i].run();
+                balls[i].run();
         }
     }
 
@@ -117,5 +123,4 @@ public class GameScene extends JPanel implements KeyListener {
         }
 
     }
-
 }

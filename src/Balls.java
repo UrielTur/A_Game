@@ -19,11 +19,15 @@ public class Balls extends Thread {
     }
 
     public void run() {
-            y +=1;
-            if (this.y > Window.WINDOW_HEIGHT) {
-                this.y = -250;
-                this.x = random.nextInt(400);
-            }
+        y +=1;
+        if (this.y > Window.WINDOW_HEIGHT) {
+            this.y = -250;
+            this.x = random.nextInt(400);
+        }
+    }
+
+    public void runDoubleSpeed() {
+        y += 3;
     }
 
 
@@ -42,17 +46,22 @@ public class Balls extends Thread {
             }
         }
         //    if (i <= 4) {
-          //   if (!this.isDisappeared) {
-            //    ImageIcon imageIcon1 = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\imageIcon\\חלב מוכן.png");
-              //  imageIcon1.paintIcon(null, graphics, this.x, this.y);
-           // }
+        //   if (!this.isDisappeared) {
+        //    ImageIcon imageIcon1 = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\imageIcon\\חלב מוכן.png");
+        //  imageIcon1.paintIcon(null, graphics, this.x, this.y);
+        // }
         //}
     }
     public Rectangle calculateRectangle() {
         return new Rectangle(this.x, this.y, SIZE, SIZE);
     }
 
-    public void catchTheBalls() {
+    public Rectangle catchTheBalls() {
+        return new Rectangle (this.x , this.y + 130 , 35, 1);
+    }
 
+    public void goingUp(){
+        this.y = -200;
+        this.x = random.nextInt(400);
     }
 }

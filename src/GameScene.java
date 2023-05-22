@@ -47,7 +47,7 @@ public class GameScene extends JPanel implements KeyListener {
 
 
     }
-
+    /*
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -58,7 +58,7 @@ public class GameScene extends JPanel implements KeyListener {
         super.paint(g);
         this.scoreScreen(g);
     }
-
+*/
 
     private void mainGameLoop() {
         new Thread(() -> {

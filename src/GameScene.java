@@ -9,7 +9,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Balls[] balls;
     private static final int X_OF_PLAYER = 215;
     private static final int Y_OF_PLAYER = 600;
-    public static final int TOTAL_PRODUCTS = 6;
+    public static final int TOTAL_PRODUCTS = 5;
     private boolean[] pressedKey;
 
     private Background background;
@@ -54,7 +54,7 @@ public class GameScene extends JPanel implements KeyListener {
                 repaint();
                 updateBalls();
                 updatePlayer();
-                if (counterOfCollision <= 10){
+                if (counterOfCollision <= 5){
                 for (int i = 0; i < balls.length; i++) {
                     if (this.collision(balls[i])) {
                         this.balls[i].run();
@@ -63,7 +63,7 @@ public class GameScene extends JPanel implements KeyListener {
                     }
                 }
                 }
-                if (counterOfCollision > 10 && counterOfCollision <= 20 ){
+                if (counterOfCollision > 5 && counterOfCollision <= 20 ){
                     for (int i = 0; i < balls.length; i++) {
                         if (this.collision(balls[i])) {
                             this.balls[i].runDoubleSpeed();
@@ -93,16 +93,16 @@ public class GameScene extends JPanel implements KeyListener {
                 int dx = 0;
                 try {
                     if (pressedKey[0])
-                        dx += 3;
+                        dx += 2;
                     if (pressedKey[1])
-                        dx -= 3;
+                        dx -= 2;
                     this.player.move(dx);
-                    if (counterOfCollision <= 10) {
-                        Thread.sleep(12);
-                    } else if (10 < counterOfCollision && counterOfCollision <= 20){
+                    if (counterOfCollision <= 5) {
                         Thread.sleep(9);
+                    } else if (5 < counterOfCollision && counterOfCollision <= 20){
+                        Thread.sleep(7);
                     } else if (20 < counterOfCollision) {
-                        Thread.sleep(8);
+                        Thread.sleep(4);
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

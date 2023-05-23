@@ -20,15 +20,15 @@ public class Balls extends Thread {
     }
 
     public void runDoubleSpeed() {
-        this.y += 16;
+        this.y += 18;
     }
 
     public void runThirdSpeed() {
-        this.y += 21;
+        this.y += 23;
     }
 
     public void runMaxSpeed() {
-        this.y += 25;
+        this.y += 35;
     }
 
 

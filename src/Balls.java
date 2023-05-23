@@ -10,26 +10,26 @@ public class Balls extends Thread {
 
     public Balls() {
         Random random = new Random();
-        this.x = random.nextInt(100,500);
-        this.y = -(random.nextInt(300,1800));
+        this.x = random.nextInt(250,350);
+        this.y = -(random.nextInt(250,1100));
 
     }
 
     public void run() {
-            this.y += 1;
+            this.y += 2;
     }
 
     public void runDoubleSpeed() {
 
-        this.y += 18;
+        this.y += 3;
     }
 
     public void runThirdSpeed() {
-        this.y += 23;
+        this.y += 4;
     }
 
     public void runMaxSpeed() {
-        this.y += 35;
+        this.y += 5;
     }
 
 
@@ -57,7 +57,7 @@ public class Balls extends Thread {
     }
 
     public void goingUp(){
-        this.y = -250;
-        this.x = random.nextInt(400);
+        this.x = random.nextInt(125,425);
+        this.y = -(random.nextInt(200 , 1000));
     }
 }

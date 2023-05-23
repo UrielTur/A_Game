@@ -9,7 +9,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Balls[] balls;
     private static final int X_OF_PLAYER = 215;
     private static final int Y_OF_PLAYER = 600;
-    public static final int TOTAL_PRODUCTS = 5;
+    public static final int TOTAL_PRODUCTS = 4;
     private boolean[] pressedKey;
 
     private Background background;
@@ -54,7 +54,7 @@ public class GameScene extends JPanel implements KeyListener {
                 repaint();
                 updateBalls();
                 updatePlayer();
-                if (counterOfCollision <= 5){
+                if (counterOfCollision <= 10){
                 for (int i = 0; i < balls.length; i++) {
                     if (this.collision(balls[i])) {
                         this.balls[i].run();
@@ -63,7 +63,7 @@ public class GameScene extends JPanel implements KeyListener {
                     }
                 }
                 }
-                if (counterOfCollision > 5 && counterOfCollision <= 20 ){
+                if (counterOfCollision > 10 && counterOfCollision <= 20 ){
                     for (int i = 0; i < balls.length; i++) {
                         if (this.collision(balls[i])) {
                             this.balls[i].runDoubleSpeed();
@@ -93,16 +93,16 @@ public class GameScene extends JPanel implements KeyListener {
                 int dx = 0;
                 try {
                     if (pressedKey[0])
-                        dx += 2;
+                        dx += 4;
                     if (pressedKey[1])
-                        dx -= 2;
+                        dx -= 4;
                     this.player.move(dx);
                     if (counterOfCollision <= 5) {
-                        Thread.sleep(9);
+                        Thread.sleep(10);
                     } else if (5 < counterOfCollision && counterOfCollision <= 20){
-                        Thread.sleep(7);
+                        Thread.sleep(9);
                     } else if (20 < counterOfCollision) {
-                        Thread.sleep(4);
+                        Thread.sleep(6);
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

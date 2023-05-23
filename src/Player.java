@@ -3,9 +3,6 @@ import java.awt.*;
 
 public class Player {
 
-    private static final int X_OF_PLAYER = 215;
-    private static final int Y_OF_PLAYER = 600;
-
     private int imageWidth = 180;//113
     private int x;
     private int y;
@@ -46,7 +43,7 @@ public class Player {
 
 
     public Rectangle calculateRectangle() {
-        return new Rectangle(this.x, this.y, Size + 10 , 20);
+        return new Rectangle(this.x, this.y, Size + 20 , 20);
     }
 
 

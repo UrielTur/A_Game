@@ -9,7 +9,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Balls[] balls;
     private static final int X_OF_PLAYER = 215;
     private static final int Y_OF_PLAYER = 600;
-    public static final int TOTAL_PRODUCTS = 5;
+    public static final int TOTAL_PRODUCTS = 6;
     private boolean[] pressedKey;
 
     private Background background;
@@ -49,7 +49,8 @@ public class GameScene extends JPanel implements KeyListener {
     private void mainGameLoop() {
         new Thread(() -> {
             int counterOfCollision = 0;
-            while (true) {
+            boolean playTheGame = true;
+            while (playTheGame) {
                 repaint();
                 updateBalls();
                 updatePlayer();
@@ -62,13 +63,31 @@ public class GameScene extends JPanel implements KeyListener {
                     }
                 }
                 }
-                if (counterOfCollision > 10){
+                if (counterOfCollision > 10 && counterOfCollision <= 20 ){
                     for (int i = 0; i < balls.length; i++) {
                         if (this.collision(balls[i])) {
                             this.balls[i].runDoubleSpeed();
                             this.balls[i].goingUp();
                             counterOfCollision++;
                     }
+                    }
+                }
+                if (counterOfCollision > 20 && counterOfCollision <= 30 ){
+                    for (int i = 0; i < balls.length; i++) {
+                        if (this.collision(balls[i])) {
+                            this.balls[i].runThirdSpeed();
+                            this.balls[i].goingUp();
+                            counterOfCollision++;
+                        }
+                    }
+                }
+                if (counterOfCollision > 30) {
+                    for (int i = 0; i < balls.length; i++) {
+                        if (this.collision(balls[i])) {
+                            this.balls[i].runMaxSpeed();
+                            this.balls[i].goingUp();
+                            counterOfCollision++;
+                        }
                     }
                 }
                 int dx = 0;
@@ -80,12 +99,15 @@ public class GameScene extends JPanel implements KeyListener {
                     this.player.move(dx);
                     if (counterOfCollision <= 10) {
                         Thread.sleep(12);
-                    } else {
+                    } else if (10 < counterOfCollision && counterOfCollision <= 20){
                         Thread.sleep(9);
+                    } else if (20 < counterOfCollision) {
+                        Thread.sleep(8);
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+
             }
 
         }).start();
@@ -99,6 +121,7 @@ public class GameScene extends JPanel implements KeyListener {
 
         return collision;
     }
+
 
     public void updatePlayer() {
         if (player.getX() < 0 || player.getX() > Window.WINDOW_WIDTH - this.player.getImageWidth()) {

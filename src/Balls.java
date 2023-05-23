@@ -16,16 +16,23 @@ public class Balls extends Thread {
     }
 
     public void run() {
-            this.y += 1;
-        if (this.y > Window.WINDOW_HEIGHT) {
-            this.y = -250;
-            this.x = random.nextInt(400);
-        }
+            this.y += 2;
     }
 
     public void runDoubleSpeed() {
-        this.y += 15;
+        this.y += 16;
     }
+
+    public void runThirdSpeed() {
+        this.y += 21;
+    }
+
+    public void runMaxSpeed() {
+        this.y += 25;
+    }
+
+
+
 
 
     public void paint(Graphics graphics, int i) {//מיכשולים
@@ -49,7 +56,7 @@ public class Balls extends Thread {
     }
 
     public void goingUp(){
-        this.y = -200;
+        this.y = -250;
         this.x = random.nextInt(400);
     }
 }

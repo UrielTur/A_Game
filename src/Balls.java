@@ -16,7 +16,7 @@ public class Balls extends Thread {
     }
 
     public void run() {
-            this.y += 2;
+            this.y += 1;
     }
 
     public void runDoubleSpeed() {

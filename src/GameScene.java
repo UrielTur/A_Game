@@ -50,30 +50,41 @@ public class GameScene extends JPanel implements KeyListener {
 
     private void mainGameLoop() {
         new Thread(() -> {
+            int counterOfCollision = 0;
             while (true) {
                 repaint();
                 updateBalls();
                 updatePlayer();
-                int counterOfCollision = 0;
+                if (counterOfCollision <= 10){
                 for (int i = 0; i < balls.length; i++) {
-                    if (collision(balls[i])) {
-                        counterOfCollision++;
+                    if (this.collision(balls[i])) {
+                        this.balls[i].run();
                         this.balls[i].goingUp();
-                        if (counterOfCollision > 5){
-                            this.balls[i].runDoubleSpeed();
-                        }
+                        counterOfCollision++;
                     }
                 }
-                int counter = 0;
+                }
+                if (counterOfCollision > 10){
+                    for (int i = 0; i < balls.length; i++) {
+                        if (this.collision(balls[i])) {
+                            this.balls[i].runDoubleSpeed();
+                            this.balls[i].goingUp();
+                            counterOfCollision++;
+                    }
+                    }
+                }
                 int dx = 0;
                 try {
                     if (pressedKey[0])
-                        dx += 4;
+                        dx += 3;
                     if (pressedKey[1])
-                        dx -= 4;
+                        dx -= 3;
                     this.player.move(dx);
-
-                    Thread.sleep(10);
+                    if (counterOfCollision <= 10) {
+                        Thread.sleep(11);
+                    } else {
+                        Thread.sleep(9);
+                    }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

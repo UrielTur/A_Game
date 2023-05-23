@@ -10,7 +10,6 @@ public class Player {
     private int x;
     private int y;
     public static final int Size = 50;
-    private boolean alive;
 
 
     public Player(int x, int y) {
@@ -47,12 +46,9 @@ public class Player {
 
 
     public Rectangle calculateRectangle() {
-        return new Rectangle(this.x, this.y, Size, Size + Size);
+        return new Rectangle(this.x, this.y, Size + 10 , 20);
     }
 
-    public boolean isAlive() {
-        return this.alive;
-    }
 
     public int getImageWidth() {
         return imageWidth;

@@ -64,6 +64,7 @@ public class GameScene extends JPanel implements KeyListener {
                         }
                     }
                 }
+                int counter = 0;
                 int dx = 0;
                 try {
                     if (pressedKey[0])
@@ -71,6 +72,7 @@ public class GameScene extends JPanel implements KeyListener {
                     if (pressedKey[1])
                         dx -= 4;
                     this.player.move(dx);
+
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

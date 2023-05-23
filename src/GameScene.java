@@ -16,6 +16,7 @@ public class GameScene extends JPanel implements KeyListener {
     private ScoreScreen scoreScreen;
 
 
+
     public GameScene() {
         this.pressedKey = new boolean[2];
         this.background = new Background();

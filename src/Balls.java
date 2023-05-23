@@ -60,4 +60,5 @@ public class Balls extends Thread {
         this.x = random.nextInt(125,425);
         this.y = -(random.nextInt(200 , 1000));
     }
+
 }

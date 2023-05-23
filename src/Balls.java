@@ -10,8 +10,8 @@ public class Balls extends Thread {
 
     public Balls() {
         Random random = new Random();
-        this.x = random.nextInt(50,500);
-        this.y = -(random.nextInt(250,1200));
+        this.x = random.nextInt(100,500);
+        this.y = -(random.nextInt(300,1800));
 
     }
 

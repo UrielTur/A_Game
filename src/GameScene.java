@@ -21,8 +21,6 @@ public class GameScene extends JPanel implements KeyListener {
         this.background = new Background();
         this.player = new Player(X_OF_PLAYER, Y_OF_PLAYER);
         this.balls = new Balls[TOTAL_PRODUCTS];
-        //  this.scoreScreen = new ScoreScreen();
-        //    this.add(scoreScreen);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
@@ -81,7 +79,7 @@ public class GameScene extends JPanel implements KeyListener {
                         dx -= 3;
                     this.player.move(dx);
                     if (counterOfCollision <= 10) {
-                        Thread.sleep(11);
+                        Thread.sleep(12);
                     } else {
                         Thread.sleep(9);
                     }

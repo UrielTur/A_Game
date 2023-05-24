@@ -13,11 +13,19 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean[] pressedKey;
 
     private Background background;
-    private ScoreScreen scoreScreen;
+    private StartingGame startingGame;
+
 
 
 
     public GameScene() {
+        this.startingGame = new StartingGame();
+        this.revalidate();
+        StartingGame startingGame = new StartingGame();
+        startingGame.buttonOfStart.addActionListener(e -> {
+            startingGame.setVisible(false);
+        });
+        this.add(startingGame);
         this.pressedKey = new boolean[2];
         this.background = new Background();
         this.player = new Player(X_OF_PLAYER, Y_OF_PLAYER);
@@ -37,7 +45,6 @@ public class GameScene extends JPanel implements KeyListener {
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics); // כדי לא לדרוס דברים שהם הכרחיים מבהמחלקה הזאת
         this.background.paint(graphics);
-//        this.scoreScreen.paint(graphics);
         this.player.paint(graphics);
 
         for (int i = 0; i < this.balls.length; i++) {
@@ -48,70 +55,69 @@ public class GameScene extends JPanel implements KeyListener {
 
 
     private void mainGameLoop() {
-        new Thread(() -> {
-            int counterOfCollision = 0;
-            boolean playTheGame = true;
-            while (playTheGame) {
-                repaint();
-                updateBalls();
-                updatePlayer();
-                if (counterOfCollision <= 10){
-                for (int i = 0; i < balls.length; i++) {
-                    if (this.collision(balls[i])) {
-                        this.balls[i].run();
-                        this.balls[i].goingUp();
-                        counterOfCollision++;
-                    }
-                }
-                }
-                if (counterOfCollision > 10 && counterOfCollision <= 20 ){
-                    for (int i = 0; i < balls.length; i++) {
-                        if (this.collision(balls[i])) {
-                            this.balls[i].runDoubleSpeed();
-                            this.balls[i].goingUp();
-                            counterOfCollision++;
-                    }
-                    }
-                }
-                if (counterOfCollision > 20 && counterOfCollision <= 30 ){
-                    for (int i = 0; i < balls.length; i++) {
-                        if (this.collision(balls[i])) {
-                            this.balls[i].runThirdSpeed();
-                            this.balls[i].goingUp();
-                            counterOfCollision++;
+            new Thread(() -> {
+                int counterOfCollision = 0;
+                while (true) {
+                    repaint();
+                    updateBalls();
+                    updatePlayer();
+                    if (counterOfCollision <= 10) {
+                        for (int i = 0; i < balls.length; i++) {
+                            if (this.collision(balls[i])) {
+                                this.balls[i].run();
+                                this.balls[i].goingUp();
+                                counterOfCollision++;
+                            }
                         }
                     }
-                }
-                if (counterOfCollision > 30) {
-                    for (int i = 0; i < balls.length; i++) {
-                        if (this.collision(balls[i])) {
-                            this.balls[i].runMaxSpeed();
-                            this.balls[i].goingUp();
-                            counterOfCollision++;
+                    if (counterOfCollision > 10 && counterOfCollision <= 20) {
+                        for (int i = 0; i < balls.length; i++) {
+                            if (this.collision(balls[i])) {
+                                this.balls[i].runDoubleSpeed();
+                                this.balls[i].goingUp();
+                                counterOfCollision++;
+                            }
                         }
                     }
-                }
-                int dx = 0;
-                try {
-                    if (pressedKey[0])
-                        dx += 4;
-                    if (pressedKey[1])
-                        dx -= 4;
-                    this.player.move(dx);
-                    if (counterOfCollision <= 5) {
-                        Thread.sleep(10);
-                    } else if (5 < counterOfCollision && counterOfCollision <= 20){
-                        Thread.sleep(9);
-                    } else if (20 < counterOfCollision) {
-                        Thread.sleep(6);
+                    if (counterOfCollision > 20 && counterOfCollision <= 30) {
+                        for (int i = 0; i < balls.length; i++) {
+                            if (this.collision(balls[i])) {
+                                this.balls[i].runThirdSpeed();
+                                this.balls[i].goingUp();
+                                counterOfCollision++;
+                            }
+                        }
                     }
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                    if (counterOfCollision > 30) {
+                        for (int i = 0; i < balls.length; i++) {
+                            if (this.collision(balls[i])) {
+                                this.balls[i].runMaxSpeed();
+                                this.balls[i].goingUp();
+                                counterOfCollision++;
+                            }
+                        }
+                    }
+                    int dx = 0;
+                    try {
+                        if (pressedKey[0])
+                            dx += 4;
+                        if (pressedKey[1])
+                            dx -= 4;
+                        this.player.move(dx);
+                        if (counterOfCollision <= 5) {
+                            Thread.sleep(10);
+                        } else if (5 < counterOfCollision && counterOfCollision <= 20) {
+                            Thread.sleep(9);
+                        } else if (20 < counterOfCollision) {
+                            Thread.sleep(6);
+                        }
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
 
-            }
 
-        }).start();
+            }).start();
     }
 
     private boolean collision (Balls balls) {

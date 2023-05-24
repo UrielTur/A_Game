@@ -10,16 +10,11 @@ public class Window extends JFrame {
         this.setResizable(false);
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setTitle("Ball Catching");
+        this.setTitle("Super Sall");
         this.setLocationRelativeTo(null);
         GameScene game = new GameScene();
         this.add(game);
-        this.setVisible(true);
 
-
-    }
-    public void PaintComponent(Graphics graphics){
-        super.paintComponents(graphics);
 
     }
 

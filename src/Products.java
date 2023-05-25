@@ -2,13 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class Balls extends Thread {
+public class Products extends Thread {
     private int x;
     private int y;
     public static final int SIZE = 30;
     private Random random = new Random();
 
-    public Balls() {
+    public Products() {
         Random random = new Random();
         this.x = random.nextInt(250,350);
         this.y = -(random.nextInt(250,1100));
@@ -52,7 +52,7 @@ public class Balls extends Thread {
         return new Rectangle(this.x, this.y, SIZE, SIZE);
     }
 
-    public Rectangle catchTheBalls() {
+    public Rectangle catchTheProducts() {
         return new Rectangle (this.x , this.y + 130 , 35, 1);
     }
 

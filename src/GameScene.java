@@ -6,7 +6,7 @@ import java.awt.event.KeyListener;
 public class GameScene extends JPanel implements KeyListener {
 
     private Player player;
-    private Balls[] balls;
+    private Products[] products;
     private static final int X_OF_PLAYER = 215;
     private static final int Y_OF_PLAYER = 600;
     public static final int TOTAL_PRODUCTS = 4;
@@ -14,27 +14,41 @@ public class GameScene extends JPanel implements KeyListener {
 
     private Background background;
     private StartingGame startingGame;
+    private InstructionsScreen instructionsScreen;
 
 
 
 
     public GameScene() {
         this.startingGame = new StartingGame();
-        this.revalidate();
-        StartingGame startingGame = new StartingGame();
-        startingGame.buttonOfStart.addActionListener(e -> {
+        this.instructionsScreen = new InstructionsScreen();
+        StartingGame.buttonOfStart.addActionListener(e -> { //הכנה בשביל מאור
             startingGame.setVisible(false);
+            this.revalidate();
+        });
+
+        StartingGame.buttonOfInstructions.addActionListener(e -> { //הכנה בשביל מאור
+            startingGame.setVisible(false);
+            instructionsScreen.setVisible(true);
+            this.revalidate();
+        });
+
+        InstructionsScreen.closeTheInstructions.addActionListener(e -> {
+            startingGame.setVisible(true);
+            instructionsScreen.setVisible(false);
+            this.revalidate();
         });
         this.add(startingGame);
+        this.add(instructionsScreen);
         this.pressedKey = new boolean[2];
         this.background = new Background();
         this.player = new Player(X_OF_PLAYER, Y_OF_PLAYER);
-        this.balls = new Balls[TOTAL_PRODUCTS];
+        this.products = new Products[TOTAL_PRODUCTS];
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.requestFocus();
-        for (int i = 0; i < this.balls.length; i++) {
-            this.balls[i] = new Balls();
+        for (int i = 0; i < this.products.length; i++) {
+            this.products[i] = new Products();
         }
         this.mainGameLoop();
         this.addKeyListener(this);
@@ -47,8 +61,8 @@ public class GameScene extends JPanel implements KeyListener {
         this.background.paint(graphics);
         this.player.paint(graphics);
 
-        for (int i = 0; i < this.balls.length; i++) {
-            this.balls[i].paint(graphics, i);
+        for (int i = 0; i < this.products.length; i++) {
+            this.products[i].paint(graphics, i);
         }
     }
 
@@ -62,37 +76,37 @@ public class GameScene extends JPanel implements KeyListener {
                     updateBalls();
                     updatePlayer();
                     if (counterOfCollision <= 10) {
-                        for (int i = 0; i < balls.length; i++) {
-                            if (this.collision(balls[i])) {
-                                this.balls[i].run();
-                                this.balls[i].goingUp();
+                        for (int i = 0; i < products.length; i++) {
+                            if (this.collision(products[i])) {
+                                this.products[i].run();
+                                this.products[i].goingUp();
                                 counterOfCollision++;
                             }
                         }
                     }
                     if (counterOfCollision > 10 && counterOfCollision <= 20) {
-                        for (int i = 0; i < balls.length; i++) {
-                            if (this.collision(balls[i])) {
-                                this.balls[i].runDoubleSpeed();
-                                this.balls[i].goingUp();
+                        for (int i = 0; i < products.length; i++) {
+                            if (this.collision(products[i])) {
+                                this.products[i].runDoubleSpeed();
+                                this.products[i].goingUp();
                                 counterOfCollision++;
                             }
                         }
                     }
                     if (counterOfCollision > 20 && counterOfCollision <= 30) {
-                        for (int i = 0; i < balls.length; i++) {
-                            if (this.collision(balls[i])) {
-                                this.balls[i].runThirdSpeed();
-                                this.balls[i].goingUp();
+                        for (int i = 0; i < products.length; i++) {
+                            if (this.collision(products[i])) {
+                                this.products[i].runThirdSpeed();
+                                this.products[i].goingUp();
                                 counterOfCollision++;
                             }
                         }
                     }
                     if (counterOfCollision > 30) {
-                        for (int i = 0; i < balls.length; i++) {
-                            if (this.collision(balls[i])) {
-                                this.balls[i].runMaxSpeed();
-                                this.balls[i].goingUp();
+                        for (int i = 0; i < products.length; i++) {
+                            if (this.collision(products[i])) {
+                                this.products[i].runMaxSpeed();
+                                this.products[i].goingUp();
                                 counterOfCollision++;
                             }
                         }
@@ -120,9 +134,9 @@ public class GameScene extends JPanel implements KeyListener {
             }).start();
     }
 
-    private boolean collision (Balls balls) {
+    private boolean collision (Products products) {
         boolean collision = false;
-        if (balls.catchTheBalls().intersects(this.player.calculateRectangle())){
+        if (products.catchTheProducts().intersects(this.player.calculateRectangle())){
             collision = true;
         }
 
@@ -138,8 +152,8 @@ public class GameScene extends JPanel implements KeyListener {
 
 
     private void updateBalls() {
-        for (int i = 0; i < balls.length; i++) {
-                balls[i].run();
+        for (int i = 0; i < products.length; i++) {
+                products[i].run();
         }
     }
 

@@ -3,9 +3,9 @@ import java.awt.*;
 
 public class Player {
 
-    private int imageWidth = 180;//113
+    private final int imageWidth = 180;
     private int x;
-    private int y;
+    private final int y;
     public static final int Size = 50;
 
 
@@ -18,13 +18,9 @@ public class Player {
         return x;
     }
 
-    public int getY() {
-        return y;
-    }
 
     public void paint(Graphics graphics) {
         ImageIcon imageIcon = new ImageIcon("C:/Users/USER/IdeaProjects/A_Game/src/imageIcon/nufi1.png");
-//            imageIcon.getIconWidth();
         imageIcon.paintIcon(null, graphics, this.x, this.y - 100);
     }
 

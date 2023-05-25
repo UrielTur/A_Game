@@ -10,7 +10,7 @@ public class StartingGame extends JPanel {
 
 
     public static JButton buttonOfStart;
-    private JButton buttonOfInstractions; //כפתור בשביל ההוראות
+    public static JButton buttonOfInstructions; //כפתור בשביל ההוראות
 
 
     public StartingGame() {
@@ -36,13 +36,10 @@ public class StartingGame extends JPanel {
         add(buttonOfStart);
 
 
-        buttonOfInstractions = new JButton("הוראות");
-        buttonOfInstractions.setBounds(235, 350, 150, 50); // מגדיר מיקום וגודל לכפתור
-        buttonOfInstractions.setFont(new Font("Arial" , Font.BOLD , 20));
-        buttonOfStart.addActionListener(e -> { //הכנה בשביל מאור
-
-        });
-        add(buttonOfInstractions);
+        buttonOfInstructions = new JButton("הוראות");
+        buttonOfInstructions.setBounds(235, 350, 150, 50); // מגדיר מיקום וגודל לכפתור
+        buttonOfInstructions.setFont(new Font("Arial" , Font.BOLD , 20));
+        add(buttonOfInstructions);
 
 
     }

@@ -14,11 +14,6 @@ public class InstructionsScreen extends JPanel {
         closeTheInstructions = new JButton("סגור הוראות");
         closeTheInstructions.setBounds(235, 600, 150, 50); // מגדיר מיקום וגודל לכפתור
         closeTheInstructions.setFont(new Font("Arial", Font.BOLD, 20));
-        closeTheInstructions.addActionListener(e -> {
-            StartingGame startingGame = new StartingGame();
-            setVisible(false);
-            startingGame.setVisible(true);
-        });
         add(closeTheInstructions);
 
 

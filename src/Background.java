@@ -3,8 +3,8 @@ import java.awt.*;
 
 public class Background {
 
-    public static final int X = 0;
-    public static final int Y = 0;
+    private static int X = 0;
+    private static final int Y = 0;
 
     public Background(){
 

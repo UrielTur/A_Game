@@ -32,8 +32,8 @@ public class Player {
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.x >= Window.WINDOW_WIDTH - imageWidth) {
-            this.x = Window.WINDOW_WIDTH - imageWidth;
+        if (this.x >= Window.getWindowWidth() - imageWidth) {
+            this.x = Window.getWindowWidth() - imageWidth;
         }
     }
 

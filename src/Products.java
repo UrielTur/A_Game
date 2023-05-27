@@ -8,6 +8,7 @@ public class Products extends Thread {
     public static final int SIZE = 30;
     private Random random = new Random();
 
+
     public Products() {
         Random random = new Random();
         this.x = random.nextInt(250,350);

@@ -9,8 +9,8 @@ public class StartingGame extends JPanel {
     private final Color myColor =  new Color(199 , 58 , 82);
 
 
-    public static JButton buttonOfStart;
-    public static JButton buttonOfInstructions; //כפתור בשביל ההוראות
+    private static JButton buttonOfStart;
+    private static JButton buttonOfInstructions; //כפתור בשביל ההוראות
 
 
     public StartingGame() {
@@ -44,8 +44,12 @@ public class StartingGame extends JPanel {
 
     }
 
-//    public boolean ifVisible
-
-
-
+    public static JButton getButtonOfStart() {
+        return buttonOfStart;
     }
+
+    public static JButton getButtonOfInstructions() {
+        return buttonOfInstructions;
+    }
+
+}

@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class InstructionsScreen extends JPanel {
 
-    public static JButton closeTheInstructions;
+    private static JButton closeTheInstructions;
 
 
     public InstructionsScreen() {
@@ -16,6 +16,9 @@ public class InstructionsScreen extends JPanel {
         closeTheInstructions.setFont(new Font("Arial", Font.BOLD, 20));
         add(closeTheInstructions);
 
+    }
 
+    public static JButton getCloseTheInstructions() {
+        return closeTheInstructions;
     }
 }

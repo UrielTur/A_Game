@@ -2,8 +2,8 @@ import javax.swing.*;
 
 public class Window extends JFrame {
 
-    public static  final int WINDOW_WIDTH = 640;//רוחב
-    public static final int WINDOW_HEIGHT = 710;//גובה
+    private static int WINDOW_WIDTH = 640;//רוחב
+    private static int WINDOW_HEIGHT = 710;//גובה
 
     public Window(){
         this.setResizable(false);
@@ -17,7 +17,17 @@ public class Window extends JFrame {
 
     }
 
+    public static int getWindowWidth() {
+        return WINDOW_WIDTH;
+    }
+
+    public static int getWindowHeight() {
+        return WINDOW_HEIGHT;
+    }
+
     public void showWindow () {
         this.setVisible(true);
     }
+
+
 }

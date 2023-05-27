@@ -9,7 +9,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Products[] products;
     private static final int X_OF_PLAYER = 215;
     private static final int Y_OF_PLAYER = 600;
-    public static final int TOTAL_PRODUCTS = 4;
+    private static final int TOTAL_PRODUCTS = 4;
     private boolean[] pressedKey;
 
     private Background background;
@@ -22,19 +22,19 @@ public class GameScene extends JPanel implements KeyListener {
     public GameScene() {
         this.startingGame = new StartingGame();
         this.instructionsScreen = new InstructionsScreen();
-        StartingGame.buttonOfStart.addActionListener(e -> { //הכנה בשביל מאור
+        StartingGame.getButtonOfStart().addActionListener(e -> { //הכנה בשביל מאור
             startingGame.setVisible(false);
             instructionsScreen.setVisible(false);
         });
         this.revalidate();
 
-        StartingGame.buttonOfInstructions.addActionListener(e -> { //הכנה בשביל מאור
+        StartingGame.getButtonOfInstructions().addActionListener(e -> { //הכנה בשביל מאור
             startingGame.setVisible(false);
             instructionsScreen.setVisible(true);
             this.revalidate();
         });
 
-        InstructionsScreen.closeTheInstructions.addActionListener(e -> {
+        InstructionsScreen.getCloseTheInstructions().addActionListener(e -> {
             startingGame.setVisible(true);
             instructionsScreen.setVisible(false);
             this.revalidate();
@@ -147,7 +147,7 @@ public class GameScene extends JPanel implements KeyListener {
 
 
     public void updatePlayer() {
-        if (player.getX() < 0 || player.getX() > Window.WINDOW_WIDTH - this.player.getImageWidth()) {
+        if (player.getX() < 0 || player.getX() > Window.getWindowHeight() - this.player.getImageWidth()) {
             player.stopRun();
         }
     }

@@ -24,6 +24,7 @@ public class GameScene extends JPanel implements KeyListener {
         this.instructionsScreen = new InstructionsScreen();
         StartingGame.getButtonOfStart().addActionListener(e -> { //הכנה בשביל מאור
             startingGame.setVisible(false);
+            this.mainGameLoop();
             instructionsScreen.setVisible(false);
         });
         this.revalidate();
@@ -51,7 +52,7 @@ public class GameScene extends JPanel implements KeyListener {
         for (int i = 0; i < this.products.length; i++) {
             this.products[i] = new Products();
         }
-        this.mainGameLoop();
+//        this.mainGameLoop();
         this.addKeyListener(this);
 
     }

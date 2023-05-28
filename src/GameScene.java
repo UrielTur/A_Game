@@ -147,7 +147,7 @@ public class GameScene extends JPanel implements KeyListener {
 
 
     public void updatePlayer() {
-        if (player.getX() < 0 || player.getX() > Window.getWindowHeight() - this.player.getImageWidth()) {
+        if (player.getX() < 0 || player.getX() > (Window.getWindowWidth() - player.getImageWidth())) {
             player.stopRun();
         }
     }

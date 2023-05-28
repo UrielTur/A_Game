@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class Player {
 
-    private final int imageWidth = 180;
+    private static final int imageWidth = 180;
     private int x;
     private final int y;
     public static final int Size = 50;
@@ -32,8 +32,8 @@ public class Player {
         if (this.x < 0) {
             this.x = 0;
         }
-        if (this.x >= Window.getWindowWidth() - imageWidth) {
-            this.x = Window.getWindowWidth() - imageWidth;
+        if (this.x >= (Window.getWindowWidth()) - imageWidth) {
+            this.x = (Window.getWindowWidth()) - imageWidth;
         }
     }
 

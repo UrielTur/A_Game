@@ -20,6 +20,10 @@ public class Products extends Thread {
             this.y += 2;
     }
 
+    public boolean checkLimit(){
+        return this.y+0<Window.getWindowHeight();
+    }
+
     public void runDoubleSpeed() {
 
         this.y += 3;
@@ -57,9 +61,13 @@ public class Products extends Thread {
         return new Rectangle (this.x , this.y + 130 , 35, 1);
     }
 
+
     public void goingUp(){
         this.x = random.nextInt(125,425);
         this.y = -(random.nextInt(200 , 1000));
     }
 
+    public int getY() {
+        return y;
+    }
 }

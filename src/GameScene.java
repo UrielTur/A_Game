@@ -14,34 +14,35 @@ public class GameScene extends JPanel implements KeyListener {
 
     private Background background;
     private StartingGame startingGame;
-    private InstructionsScreen instructionsScreen;
-
+    private GameOverScreen gameOverScreen;
 
 
 
     public GameScene() {
         this.startingGame = new StartingGame();
-        this.instructionsScreen = new InstructionsScreen();
+//        this.instructionsScreen = new InstructionsScreen();
+        this.gameOverScreen = new GameOverScreen();
         StartingGame.getButtonOfStart().addActionListener(e -> { //הכנה בשביל מאור
             startingGame.setVisible(false);
             this.mainGameLoop();
-            instructionsScreen.setVisible(false);
+//            instructionsScreen.setVisible(false);
         });
         this.revalidate();
 
-        StartingGame.getButtonOfInstructions().addActionListener(e -> { //הכנה בשביל מאור
-            startingGame.setVisible(false);
-            instructionsScreen.setVisible(true);
-            this.revalidate();
-        });
+//        StartingGame.getButtonOfInstructions().addActionListener(e -> { //הכנה בשביל מאור
+//            startingGame.setVisible(false);
+//            instructionsScreen.setVisible(true);
+//            this.revalidate();
+//        });
 
-        InstructionsScreen.getCloseTheInstructions().addActionListener(e -> {
-            startingGame.setVisible(true);
-            instructionsScreen.setVisible(false);
-            this.revalidate();
-        });
+//        InstructionsScreen.getCloseTheInstructions().addActionListener(e -> {
+//            startingGame.setVisible(true);
+//            instructionsScreen.setVisible(false);
+//            this.revalidate();
+//        });
         this.add(startingGame);
-        this.add(instructionsScreen);
+//        this.add(instructionsScreen);
+        this.gameOverScreen = new GameOverScreen();
         this.pressedKey = new boolean[2];
         this.background = new Background();
         this.player = new Player(X_OF_PLAYER, Y_OF_PLAYER);
@@ -52,7 +53,6 @@ public class GameScene extends JPanel implements KeyListener {
         for (int i = 0; i < this.products.length; i++) {
             this.products[i] = new Products();
         }
-//        this.mainGameLoop();
         this.addKeyListener(this);
 
     }
@@ -69,77 +69,97 @@ public class GameScene extends JPanel implements KeyListener {
     }
 
 
-
     private void mainGameLoop() {
-        boolean startPlay = true;
-            new Thread(() -> {
-                int counterOfCollision = 0;
-                while (startPlay) {
-                    repaint();
-                    updateBalls();
-                    updatePlayer();
-                    if (counterOfCollision <= 10) {
-                        for (int i = 0; i < products.length; i++) {
-                            if (this.collision(products[i])) {
-                                this.products[i].run();
-                                this.products[i].goingUp();
-                                counterOfCollision++;
-                            }
+        new Thread(() -> {
+            int counterOfMiss = 0;
+            int counterOfCollision = 0;
+            boolean stop = checkProducts();
+            while (stop) {
+                stop = checkProducts();
+                if (!stop){
+//                    this.add(new JLabel("Game Over!"));
+                    gameOverScreen.setVisible(true);
+                    this.revalidate();
+                    this.add(gameOverScreen);
+                }
+                repaint();
+                updateBalls();
+                updatePlayer();
+                if (counterOfCollision <= 10) {
+                    for (int i = 0; i < products.length; i++) {
+                        if (this.collision(products[i])) {
+                            this.products[i].run();
+                            this.products[i].goingUp();
+                            counterOfCollision++;
                         }
-                    }
-                    if (counterOfCollision > 10 && counterOfCollision <= 20) {
-                        for (int i = 0; i < products.length; i++) {
-                            if (this.collision(products[i])) {
-                                this.products[i].runDoubleSpeed();
-                                this.products[i].goingUp();
-                                counterOfCollision++;
-                            }
-                        }
-                    }
-                    if (counterOfCollision > 20 && counterOfCollision <= 30) {
-                        for (int i = 0; i < products.length; i++) {
-                            if (this.collision(products[i])) {
-                                this.products[i].runThirdSpeed();
-                                this.products[i].goingUp();
-                                counterOfCollision++;
-                            }
-                        }
-                    }
-                    if (counterOfCollision > 30) {
-                        for (int i = 0; i < products.length; i++) {
-                            if (this.collision(products[i])) {
-                                this.products[i].runMaxSpeed();
-                                this.products[i].goingUp();
-                                counterOfCollision++;
-                            }
-                        }
-                    }
-                    int dx = 0;
-                    try {
-                        if (pressedKey[0])
-                            dx += 4;
-                        if (pressedKey[1])
-                            dx -= 4;
-                        this.player.move(dx);
-                        if (counterOfCollision <= 5) {
-                            Thread.sleep(10);
-                        } else if (5 < counterOfCollision && counterOfCollision <= 20) {
-                            Thread.sleep(9);
-                        } else if (20 < counterOfCollision) {
-                            Thread.sleep(6);
-                        }
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
                     }
                 }
+                if (counterOfCollision > 10 && counterOfCollision <= 20) {
+                    for (int i = 0; i < products.length; i++) {
+                        if (this.collision(products[i])) {
+                            this.products[i].runDoubleSpeed();
+                            this.products[i].goingUp();
+                            counterOfCollision++;
+                        }
+                    }
+                }
+                if (counterOfCollision > 20 && counterOfCollision <= 30) {
+                    for (int i = 0; i < products.length; i++) {
+                        if (this.collision(products[i])) {
+                            this.products[i].runThirdSpeed();
+                            this.products[i].goingUp();
+                            counterOfCollision++;
+                        }
+                    }
+                }
+                if (counterOfCollision > 30) {
+                    for (int i = 0; i < products.length; i++) {
+                        if (this.collision(products[i])) {
+                            this.products[i].runMaxSpeed();
+                            this.products[i].goingUp();
+                            counterOfCollision++;
+                        }
+                    }
+                }
+                int dx = 0;
+                try {
+                    if (pressedKey[0])
+                        dx += 4;
+                    if (pressedKey[1])
+                        dx -= 4;
+                    this.player.move(dx);
+                    if (counterOfCollision <= 5) {
+                        Thread.sleep(10);
+                    } else if (5 < counterOfCollision && counterOfCollision <= 20) {
+                        Thread.sleep(9);
+                    } else if (20 < counterOfCollision) {
+                        Thread.sleep(6);
+                    }
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
 
 
-            }).start();
+        }).start();
     }
 
-    private boolean collision (Products products) {
+    private boolean checkProducts() {
+        int counter = 0;
+        for (int i = 0; i < products.length; i++) {
+            if (!products[i].checkLimit()) {
+                counter++;
+                if (counter == 4) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean collision(Products products) {
         boolean collision = false;
-        if (products.catchTheProducts().intersects(this.player.calculateRectangle())){
+        if (products.catchTheProducts().intersects(this.player.calculateRectangle())) {
             collision = true;
         }
 
@@ -156,7 +176,7 @@ public class GameScene extends JPanel implements KeyListener {
 
     private void updateBalls() {
         for (int i = 0; i < products.length; i++) {
-                products[i].run();
+            products[i].run();
         }
     }
 

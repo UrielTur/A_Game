@@ -57,11 +57,13 @@ public class GameScene extends JPanel implements KeyListener {
 
     private void mainGameLoop() {
         new Thread(() -> {
+
+
             int counterOfCollision = 0;
-//            this.counter = 0;
+            int fullCount = 0;
             boolean run = checkProducts();
             while (run) {
-                run = checkProducts();
+                run = fullCount<3;
                 if (!run){
                     gameOverScreen.setVisible(true);
                     this.revalidate();
@@ -116,7 +118,9 @@ public class GameScene extends JPanel implements KeyListener {
                     }
                 }
                 for (int i = 0; i < products.length; i++) {
+
                     if (this.products[i].inWindowHeight()) {
+                        fullCount++;
                         this.products[i].goingUp();
                     }
                 }

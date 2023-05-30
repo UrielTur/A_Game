@@ -24,7 +24,8 @@ public class Products extends Thread {
     }
 
     public boolean inWindowHeight(){
-        return this.y == Window.getWindowHeight();
+
+        return this.y > Window.getWindowHeight();
     }
 
     public void runDoubleSpeed() {
@@ -66,4 +67,7 @@ public class Products extends Thread {
         this.y = -(random.nextInt(200 , 1000));
     }
 
+    public int getY() {
+        return y;
+    }
 }

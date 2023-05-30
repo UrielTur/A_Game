@@ -34,11 +34,14 @@ public class Products extends Thread {
     }
 
     public void runThirdSpeed() {
-        this.y += 4;
+        this.y += 5;
     }
 
+    public void runfourSpeed() {
+        this.y += 6;
+    }
     public void runMaxSpeed() {
-        this.y += 5;
+        this.y += 7;
     }
 
 
@@ -64,7 +67,7 @@ public class Products extends Thread {
 
     public void goingUp(){
         this.x = random.nextInt(125,425);
-        this.y = -(random.nextInt(200 , 1000));
+        this.y = -(random.nextInt(200 , 1250));
     }
 
     public int getY() {

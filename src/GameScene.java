@@ -102,7 +102,7 @@ public class GameScene extends JPanel implements KeyListener {
                 if (counterOfCollision > 30) {
                     for (int i = 0; i < products.length; i++) {
                         if (this.collision(products[i])) {
-                            this.products[i].runMaxSpeed();
+                            this.products[i].runfourSpeed();
                             this.products[i].goingUp();
                             counterOfCollision++;
                         }
@@ -136,7 +136,7 @@ public class GameScene extends JPanel implements KeyListener {
                     } else if (5 < counterOfCollision && counterOfCollision <= 20) {
                         Thread.sleep(9);
                     } else if (20 < counterOfCollision) {
-                        Thread.sleep(6);
+                        Thread.sleep(5);
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

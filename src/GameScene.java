@@ -20,28 +20,13 @@ public class GameScene extends JPanel implements KeyListener {
 
     public GameScene() {
         this.startingGame = new StartingGame();
-//        this.instructionsScreen = new InstructionsScreen();
         this.gameOverScreen = new GameOverScreen();
         StartingGame.getButtonOfStart().addActionListener(e -> { //הכנה בשביל מאור
             startingGame.setVisible(false);
             this.mainGameLoop();
-//            instructionsScreen.setVisible(false);
         });
         this.revalidate();
-
-//        StartingGame.getButtonOfInstructions().addActionListener(e -> { //הכנה בשביל מאור
-//            startingGame.setVisible(false);
-//            instructionsScreen.setVisible(true);
-//            this.revalidate();
-//        });
-
-//        InstructionsScreen.getCloseTheInstructions().addActionListener(e -> {
-//            startingGame.setVisible(true);
-//            instructionsScreen.setVisible(false);
-//            this.revalidate();
-//        });
         this.add(startingGame);
-//        this.add(instructionsScreen);
         this.gameOverScreen = new GameOverScreen();
         this.pressedKey = new boolean[2];
         this.background = new Background();
@@ -54,6 +39,7 @@ public class GameScene extends JPanel implements KeyListener {
             this.products[i] = new Products();
         }
         this.addKeyListener(this);
+
 
     }
 
@@ -71,13 +57,12 @@ public class GameScene extends JPanel implements KeyListener {
 
     private void mainGameLoop() {
         new Thread(() -> {
-            int counterOfMiss = 0;
             int counterOfCollision = 0;
-            boolean stop = checkProducts();
-            while (stop) {
-                stop = checkProducts();
-                if (!stop){
-//                    this.add(new JLabel("Game Over!"));
+//            this.counter = 0;
+            boolean run = checkProducts();
+            while (run) {
+                run = checkProducts();
+                if (!run){
                     gameOverScreen.setVisible(true);
                     this.revalidate();
                     this.add(gameOverScreen);
@@ -121,6 +106,20 @@ public class GameScene extends JPanel implements KeyListener {
                         }
                     }
                 }
+                else {
+                    for (int i = 0; i < products.length; i++) {
+                        if (this.collision(products[i])) {
+                            this.products[i].runMaxSpeed();
+                            this.products[i].goingUp();
+                            counterOfCollision++;
+                        }
+                    }
+                }
+                for (int i = 0; i < products.length; i++) {
+                    if (this.products[i].inWindowHeight()) {
+                        this.products[i].goingUp();
+                    }
+                }
                 int dx = 0;
                 try {
                     if (pressedKey[0])
@@ -140,16 +139,15 @@ public class GameScene extends JPanel implements KeyListener {
                 }
             }
 
-
         }).start();
     }
 
     private boolean checkProducts() {
         int counter = 0;
-        for (int i = 0; i < products.length; i++) {
-            if (!products[i].checkLimit()) {
+        for (int i = 0; i < this.products.length; i++) {
+            if (!this.products[i].inLimit()) {
                 counter++;
-                if (counter == 4) {
+                if (counter == 3) {
                     return false;
                 }
             }

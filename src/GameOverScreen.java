@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class GameOverScreen extends JPanel {
     private JLabel textOfWelcome;
-    private JLabel textOfSomeText;
+
     private final Color myColor =  new Color(199 , 58 , 82);
 
 

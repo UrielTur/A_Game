@@ -5,7 +5,6 @@ import java.util.Random;
 public class Products extends Thread {
     private int x;
     private int y;
-    public static final int SIZE = 30;
     private Random random = new Random();
 
 
@@ -20,8 +19,12 @@ public class Products extends Thread {
             this.y += 2;
     }
 
-    public boolean checkLimit(){
-        return this.y+0<Window.getWindowHeight();
+    public boolean inLimit(){
+        return this.y<=Window.getWindowHeight() + 3;
+    }
+
+    public boolean inWindowHeight(){
+        return this.y == Window.getWindowHeight();
     }
 
     public void runDoubleSpeed() {
@@ -43,18 +46,14 @@ public class Products extends Thread {
 
     public void paint(Graphics graphics, int i) {//מיכשולים
 
-        if (i >= 2) {
+        if (i <=2) {
             ImageIcon imageIcon = new ImageIcon("C:/Users/USER/IdeaProjects/A_Game/src/imageIcon/78.png");
             imageIcon.paintIcon(null, graphics, this.x, this.y);
         }
-        if (i <= 2) {
+        if (i >=2) {
             ImageIcon imageIcon1 = new ImageIcon("C:\\Users\\USER\\IdeaProjects\\A_Game\\src\\imageIcon\\במבה מוכן 1.png");
             imageIcon1.paintIcon(null, graphics, this.x, this.y);
         }
-    }
-
-    public Rectangle calculateRectangle() {
-        return new Rectangle(this.x, this.y, SIZE, SIZE);
     }
 
     public Rectangle catchTheProducts() {
@@ -67,7 +66,4 @@ public class Products extends Thread {
         this.y = -(random.nextInt(200 , 1000));
     }
 
-    public int getY() {
-        return y;
-    }
 }

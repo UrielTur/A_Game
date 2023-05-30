@@ -21,7 +21,7 @@ public class StartingGame extends JPanel {
         this.setBackground(myColor);
         JLabel instruction = new JLabel("<html><br>ברוכים הבאים לסופר!<br> עליכם לתפוס את המוצרים בעזרת עגלת הקניות.  <br> במקרה ותפספסו 3 מוצרים המשחק ייגמר. <br> קצב המשחק עולה לאחר כל 5 תפיסת מוצרים. <br> היעזרו במקשים 'ימינה' ו-'שמאלה' כדי לתפוס את המוצרים. <br> בהצלחה!");
         instruction.setBounds(150, 220, 640, 200); // מגדיר מיקום וגודל לתווית
-        instruction.setFont(new Font("Arial" , Font.CENTER_BASELINE , 20));
+        instruction.setFont(new Font("Arial" , Font.BOLD , 20));
         add(instruction);
 
 

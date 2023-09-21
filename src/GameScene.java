@@ -12,7 +12,7 @@ public class GameScene extends JPanel implements KeyListener {
     private static final int TOTAL_PRODUCTS = 4;
     private boolean[] pressedKey;
 
-    private Background background;
+    private Background  background;
     private StartingGame startingGame;
     private GameOverScreen gameOverScreen;
 
@@ -102,7 +102,7 @@ public class GameScene extends JPanel implements KeyListener {
                 if (counterOfCollision > 30) {
                     for (int i = 0; i < products.length; i++) {
                         if (this.collision(products[i])) {
-                            this.products[i].runfourSpeed();
+                            this.products[i].runFourSpeed();
                             this.products[i].goingUp();
                             counterOfCollision++;
                         }

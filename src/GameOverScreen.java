@@ -17,7 +17,7 @@ public class GameOverScreen extends JPanel {
 
 
         // הוספת הרכיבים לפאנל
-        textOfWelcome = new JLabel("המשחק נגמר!");
+        textOfWelcome = new JLabel("Game Over");
         textOfWelcome.setBounds(180, 200, 550, 50); // מגדיר מיקום וגודל לתווית
         textOfWelcome.setFont(new Font("Arial" , Font.BOLD , 45));
         add(textOfWelcome);

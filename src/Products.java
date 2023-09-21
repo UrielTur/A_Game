@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class Products extends Thread {
+public class Products {
     private int x;
     private int y;
     private Random random = new Random();
@@ -37,7 +37,7 @@ public class Products extends Thread {
         this.y += 5;
     }
 
-    public void runfourSpeed() {
+    public void runFourSpeed() {
         this.y += 6;
     }
     public void runMaxSpeed() {
@@ -70,7 +70,4 @@ public class Products extends Thread {
         this.y = -(random.nextInt(200 , 1250));
     }
 
-    public int getY() {
-        return y;
-    }
 }
